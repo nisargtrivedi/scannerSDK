@@ -1,0 +1,87 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+}
+group = 'com.github.nisargtrivedi'
+
+afterEvaluate{
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.findByName('release')
+                groupId = 'com.regula.documentreader'
+                artifactId = 'scannerSDK'
+                version = '1.6'
+            }
+        }
+        repositories {
+            maven {
+                name = 'scannerSDK'
+                url = "${project.buildDir}/scannerSDK"
+            }
+        }
+    }
+}
+android {
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.regula.documentreader"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            debuggable true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    viewBinding {
+        enabled = true
+    }
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
+}
+
+dependencies {
+    //implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation project(':HBScanner')
+    //implementation(name: 'HBScanner', ext: 'aar')
+
+//    implementation('com.regula.documentreader:api:7.5.+@aar') {
+//        transitive = true
+//    }
+   // implementation files("libs/HBScanner.aar")
+
+}
+tasks.register('generateRepo', Zip) {
+    def publishTask = tasks.named('scannerSDK')
+    from publishTask.map { it.getRepository().getUrl() }
+    into 'scannerSDK'
+    archiveFileName.set('scannerSDK.zip')
+}
