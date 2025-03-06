@@ -1,7 +1,7 @@
 package com.regula.onlineprocessing_without_license_kotlin
 
 
-import android.graphics.Bitmap
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,7 @@ import com.hbscanner.DocumentScannerWrapper
 
 
 import com.regula.onlineprocessing_without_license_kotlin.databinding.ActivityMainBinding
-import kotlin.math.log
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -50,7 +50,13 @@ class MainActivity : AppCompatActivity() {
         val scanner = DocumentScannerWrapper(this)
         scanner.startScanner(this,{
             data->
-            Log.e("========","data::: ${data}")
+            var documentImage = data?.getGraphicFieldImageByType(201)
+            binding.resultIv.setImageBitmap(documentImage)
+            data!!.textResult!!.fields.forEach {
+            Log.e("SCANNER DATA========>", "FIELD NAME: "+it.getFieldName(this).toString())
+            Log.e("SCANNER DATA========>", "displayTextFields: "+it.value.toString())
+
+        }
         },{
         })
 
