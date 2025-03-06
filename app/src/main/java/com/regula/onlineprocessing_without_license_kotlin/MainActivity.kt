@@ -2,6 +2,7 @@ package com.regula.onlineprocessing_without_license_kotlin
 
 
 
+import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -51,6 +52,12 @@ class MainActivity : AppCompatActivity() {
         scanner.startScanner(this,{
             data->
             var documentImage = data?.getGraphicFieldImageByType(201)
+            val aspectRatio = documentImage?.width!!.toDouble() / documentImage.height
+                    .toDouble()
+                documentImage = Bitmap.createScaledBitmap(
+                    documentImage,
+                    (1000 * aspectRatio).toInt(), 1000, false
+                )
             binding.resultIv.setImageBitmap(documentImage)
             data!!.textResult!!.fields.forEach {
             Log.e("SCANNER DATA========>", "FIELD NAME: "+it.getFieldName(this).toString())

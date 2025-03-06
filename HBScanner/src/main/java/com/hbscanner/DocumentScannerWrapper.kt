@@ -19,7 +19,7 @@ class DocumentScannerWrapper(private val context: Context) {
         onError: (String) -> Unit
     ) {
         DocumentReader.Instance().functionality().edit()
-            .setForcePagesCount(2)
+            .setForcePagesCount(1)
             .apply();
 
         val onlineProcessingConfiguration = OnlineProcessingConfig.Builder(OnlineMode.MANUAL)
