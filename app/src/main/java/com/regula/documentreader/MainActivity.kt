@@ -1,4 +1,4 @@
-package com.regula.onlineprocessing_without_license_kotlin
+package com.regula.documentreader
 
 
 
@@ -7,10 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.hbscanner.DocumentScannerWrapper
-
-
-import com.regula.onlineprocessing_without_license_kotlin.databinding.ActivityMainBinding
-
+import com.regula.documentreader.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {

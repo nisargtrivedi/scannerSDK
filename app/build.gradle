@@ -24,8 +24,8 @@ afterEvaluate{
     }
 }
 android {
-    compileSdk 34
-
+    compileSdk 35
+    namespace = "com.regula.documentreader"
     defaultConfig {
         applicationId "com.regula.documentreader"
         minSdk 24
@@ -45,11 +45,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 
     viewBinding {
@@ -66,10 +66,10 @@ android {
 
 dependencies {
     //implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.core:core-ktx:1.15.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation project(':HBScanner')
     //implementation(name: 'HBScanner', ext: 'aar')
 

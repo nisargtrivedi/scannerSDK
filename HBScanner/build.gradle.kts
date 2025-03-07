@@ -9,7 +9,7 @@ plugins {
 android {
 
     namespace = "com.hbscanner"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -24,6 +24,13 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug{
+
+        }
+    }
+    compileOptions{
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility  = JavaVersion.VERSION_17
     }
 }
 dependencies {
